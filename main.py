@@ -3,6 +3,9 @@
 # Most of core code came from above source. This program adapts it into short term predictions and also puts it inside
 # a wrapper program to interact with, with the addition of different modes and multi-stock prediction.
 
+
+# program predicts opening price two days in advance.
+
 # ---------------------------------------------------------------------------------------------------------------------
 
 # Import statements
@@ -27,6 +30,7 @@ import matplotlib.backends.backend_pdf
 def predict_next_day_close(stock, save_graphs):
     todays_date = datetime.date(datetime.now())
     yesterdays_date = datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
+    tomorrows_date = datetime.strftime(datetime.now() + timedelta(1), '%Y-%m-%d')
     df = web.DataReader(stock, data_source='yahoo', start='2012-01-01', end=todays_date)
     data = df.filter(['Close'])
     dataset = data.values
@@ -115,7 +119,7 @@ def predict_next_day_close(stock, save_graphs):
     # Create an empty list
     X_test = []
 
-    # Append the past 365 days
+    # Append the past 60 days
     X_test.append(last_60_days_scaled)
 
     # Convert the X_test data set to a numpy array
@@ -192,17 +196,20 @@ def main(mode, how_many, stock):
     df_pred['Today Close '] = old_closes
     df_pred['Tomorrow Close (Predicted)'] = new_closes
     df_pred['Predicted Profit'] = pred_profits
+    df_pred['Profit Percentage'] = pred_movement_percents
     df_pred["Predicted Profit @ 5 Shares"] = df_pred['Predicted Profit'] * 5
     df_pred["Predicted Profit @ 10 Shares"] = df_pred['Predicted Profit'] * 10
     df_pred["Predicted Profit @ 20 Shares"] = df_pred['Predicted Profit'] * 20
     df_pred["Predicted Profit @ 50 Shares"] = df_pred['Predicted Profit'] * 50
     df_pred["Predicted Profit @ 100 Shares"] = df_pred['Predicted Profit'] * 100
+    df_pred["Predicted Profit @ 500 Shares"] = df_pred['Predicted Profit'] * 500
+    df_pred["Predicted Profit @ 1000 Shares"] = df_pred['Predicted Profit'] * 1000
     df_pred['RMSE'] = rmses
 
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', None)
 
-    result = df_pred.sort_values(by='Predicted Profit', ascending=False, )
+    result = df_pred.sort_values(by='Profit Percentage', ascending=False, )
     print(result)
 
     avg_rmse = round(df_pred["RMSE"].mean(), 5)
@@ -230,7 +237,7 @@ while to_end is False:
     # run mode code
     if mode.lower() == "r":
         print("Entered Run Mode.")
-        how_many = input("How Many stocks from the S&P 500 list would you like to predict? (randomly chosen)")
+        how_many = input("How Many stocks from the NYSE list would you like to predict? (randomly chosen)")
         graphs = main("run", how_many, "")
         pdf = matplotlib.backends.backend_pdf.PdfPages("predicted_graphs.pdf")
         for fig in range(1, len(graphs) + 1):
