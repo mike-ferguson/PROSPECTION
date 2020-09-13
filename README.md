@@ -1,7 +1,23 @@
+![alt text](https://res.cloudinary.com/jerrick/image/upload/fl_progressive,q_auto,w_1024/iyhg6zsvgfjdhgophzji.jpg)
+
+*Went to the fortune teller*   
+*To have my fortune read*  
+*I didn't know what to tell her*  
+*I had a dizzy feeling in my head*  
+*Said she'd take a look at my palm*  
+*Said "Son do you feel kind of warm?"*  
+*And she looked into her crystal ball*  
+*Said "You're in love..."*  
+-Robert Plant, Allison Krauss, *Fortune Teller*  
+
+
 PROSPECTION 
 Version 1.1
 
-This model Predicts Closing Stock Prices, 24 hours after last run. Uses all past data, going back as far as January 2012 (If stock is old enough)
+This model Predicts Closing Stock Prices, 24 hours after last run. Uses all past data, going back as far as January 2012 (If stock is old enough).
+This program looks at the S&P 500 and predicts all the stocks, and sorts by which stock it predicts will go up in 1 day by the highest percent.
+It also will filter out in the final report (dataframe sorted by predicted profit percentage) any stock whose Test RMSE value was above a cutoff,
+the defualt being 0.05. See below for other modes.
 
 LSTM Neural Network Based on Randerson112358's post on https://medium.com/@randerson112358/stock-price-prediction-using-python-machine-learning-e82a039ac2bb
 Adapted to Predict 24 hour closing differnces instead of long term differences like in the article. Uses Yahoo Stocks as source.
