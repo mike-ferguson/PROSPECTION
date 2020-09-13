@@ -1,5 +1,15 @@
 ![alt text](https://res.cloudinary.com/jerrick/image/upload/fl_progressive,q_auto,w_1024/iyhg6zsvgfjdhgophzji.jpg)
 
+*Went to the fortune teller*   
+*To have my fortune read*  
+*I didn't know what to tell her*  
+*I had a dizzy feeling in my head*  
+*Said she'd take a look at my palm*  
+*Said "Son do you feel kind of warm?"*  
+*And she looked into her crystal ball*  
+*Said "You're in love..."*  
+-Robert Plant, Allison Krauss, *Fortune Teller*  
+
 
 PROSPECTION 
 Version 1.1
