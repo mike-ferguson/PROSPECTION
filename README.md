@@ -48,7 +48,7 @@ main.py has three modes so far (more may be added in the future) that interact v
 Intended Use: Markets open at 9:30am and close 4:00pm, Monday-Friday. So, this is designed to be ran AFTER the markets have closed and Yahoo's data
               is updated. Some brokers use after-hour trading, like Robinhood, so "extended" hours are 9:00am-6:00pm.
               So, I have found the best time to run this is around 8/9pm, to predict the next days 9:30AMpm opening price for each stock wanted.
-              Example: Day is 9/15/20. Run sometime after 6pm on 9/15/20, and buy stocks then. Stocks are   uesed and are bought market open aon 9/16/20. 
+              Example: Day is 9/15/20. Run sometime after 6pm on 9/15/20, and buy stocks then. Stocks are  queued and are bought market open on 9/16/20. 
               Model outputs what predicted OPEN price will be on 9/**17**/20. This is due to the Pattern Day Trade(PDT) rule, and allows you to buy a stock on
               that day's morning, and then sell it the next day morning at open. 
 
@@ -58,8 +58,9 @@ Other Info:
 1) Normalized RMSE (NMRSE) is used to evaluate model performance/confidence in the stock prediction. I have found that anything less then 0.1
    is usually pretty accurate the next day, with above 0.1 being more unstable and less reliable, usually for stocks that have recently had their IPO,
    or for stocks that have crazy price fluctuations, like Tesla or some other penny stocks.
-2) On my 2018 MacBook Pro, each individual predict takes about 2 seconds (serial, not parallized yet), so factor this in when running large lists of stocks. 
-   I am currenlty working on optimizing and hope to get the time way down.
+2) On my 2018 MacBook Pro, each individual predict takes about 9 seconds (3 seconds with  each of 3 epochs) (serial, not parallized yet), 
+   so factor this in when running large lists of stocks. I am currenlty working on optimizing and hope to get the time way down.
+   So, running the full 500 list takes about 75 minutes, or about 1 hour 15 minutes. You can adjust # of epochs, of course.
 
 
 How To Use: I created this program to be very easy to get started and use in a black-box way, without needing to know too much ML, again using most of the source above, so credit to them for the actual model and most of the code. Here is how to use:
